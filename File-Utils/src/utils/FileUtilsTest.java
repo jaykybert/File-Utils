@@ -16,7 +16,7 @@ public class FileUtilsTest {
 		}
 		*/
 		
-		f.writeFile("wontwork.txt", true);
+		f.writeFile("wontwork.txt", false);
 		
 		
 		

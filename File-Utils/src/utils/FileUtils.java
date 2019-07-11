@@ -1,7 +1,6 @@
 package utils;
 
 import java.io.*;
-/* Change import statement (specify imports) */
 
 
 public class FileUtils {
@@ -45,15 +44,16 @@ public class FileUtils {
 	void writeFile(String filename, boolean append) {
 		
 		BufferedReader readKeyboard = new BufferedReader(new InputStreamReader(System.in));
+		PrintWriter writeConsole = new PrintWriter(System.out, true);
 		boolean keepReading = true;
 		
 		String keyboardInput;
 
 		try(FileWriter writeFile = new FileWriter(filename, append)) {
-			System.out.println("File Created\nEnter text (enter exit to quit).");
+			writeConsole.println("File Created\nEnter text (enter exit to quit).");
 			
 			while(keepReading) {
-				System.out.print("> ");
+				writeConsole.println("> ");
 				keyboardInput = readKeyboard.readLine();
 				
 				if (keyboardInput.contentEquals("exit")) {
@@ -63,17 +63,12 @@ public class FileUtils {
 					writeFile.write(keyboardInput+"\n");
 				}	
 			}
-			System.out.println("Text successfully written.");
+			writeConsole.println("Text successfully written.");
 		}
 		catch(IOException ex) {
 			System.out.println(ex);
-		}
-		
-		
-		
+		}	
 	}
-
-
 
 }
 
