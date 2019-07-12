@@ -69,6 +69,70 @@ public class FileUtils {
 			System.out.println(ex);
 		}	
 	}
+	
+	
+	boolean compareFiles(String file1, String file2) {
+		String resultsFile = "";
+	
+		return compareFiles(file1, file2, resultsFile);
+	}
+	
+	boolean compareFiles(String f1, String f2, String resultsFile) {
+		boolean equal = true;
+		String content1 = "";
+		String content2 = "";
+		int lineCounter = 0;
+		
+		PrintWriter writeConsole = new PrintWriter(System.out, true);
 
+		try(BufferedReader file1 = new BufferedReader(new FileReader(f1));
+			BufferedReader file2 = new BufferedReader(new FileReader(f2))) {
+			
+			while(!content1.contentEquals("End Of File") & !content2.contentEquals("End Of File")) {
+				content1 = file1.readLine();
+				content2 = file2.readLine();
+				lineCounter++;
+				
+				// Check for nulls.
+				if(content1 == null) {
+					content1 = "End Of File";
+				}
+	
+				if(content2 == null) {
+					content2 = "End Of File";
+				}
+				
+				// Different lines.
+				if(!content1.contentEquals(content2)) {
+					equal = false;
+					// Check if they want to write to a file.
+					if(!resultsFile.contentEquals("")) {
+						/* Is this opening and overwriting the file on each iteration?
+						 * 
+						 */
+						try(FileWriter writeFile = new FileWriter(resultsFile)) {
+							writeFile.write("LINE: " + lineCounter);
+							writeFile.write("\n" + f1 + "\n\t" + content1);
+							writeFile.write("\n" + f2 + "\n\t" + content2);	
+						}
+						catch(IOException ex) {
+							writeConsole.println(ex);
+						}
+					}
+					
+				} 	
+			} 		
+		return equal;
+		
+		}
+		catch(IOException ex) {
+			writeConsole.println(ex);
+			return false;
+		}
+		
+	}
+
+	
+	
+	
 }
-

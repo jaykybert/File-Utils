@@ -16,8 +16,10 @@ public class FileUtilsTest {
 		}
 		*/
 		
-		f.writeFile("wontwork.txt", false);
 		
+		//f.writeFile("wontwork.txt", false);
+		
+		System.out.println(f.compareFiles(filenames[0], filenames[1]));
 		
 		
 	}
