@@ -72,32 +72,59 @@ public class FileUtils {
 	
 	
 	boolean compareFiles(String file1, String file2) {
-		String resultsFile = "";
 	
-		return compareFiles(file1, file2, resultsFile);
-	}
-	
-	
-	boolean compareFiles(String f1, String f2, String resultsFile) {
-		String content1 = "";
-		String content2 = "";
-		
-		int lineCounter = 0;
-		
-		PrintWriter writeConsole = new PrintWriter(System.out, true);
-		
-		try(BufferedReader file1 = new BufferedReader(new FileReader(f1));
-			BufferedReader file2 = new BufferedReader(new FileReader(f2))) {
-			
-			while( (content1 = file1.readLine()) != null | (content2 = file2.readLine()) != null) {
-				lineCounter++;
-				
-				}
-	
+		// Separate the methods.
 		return true;
 	}
 	
 	
+	boolean compareFiles(String f1, String f2, String resultsFile) {
+		/** Iterate through two files, writing any differences to a results file.
+		 * 	@param f1: File 1.
+		 * 	@param f2: File 2.
+		 *  @param resultsFile: The output file.
+		 *  @return: true/false depending on if the files are the same.
+		 */
+		boolean equals = true;
+		int lineCounter = 0;
+		String content1 = "";
+		String content2 = "";
+		
+		PrintWriter writeConsole = new PrintWriter(System.out, true);
+		
+		try(BufferedReader file1 = new BufferedReader(new FileReader(f1));
+			BufferedReader file2 = new BufferedReader(new FileReader(f2));
+			FileWriter writeFile = new FileWriter(resultsFile)) {
+			
+			while((content1 = file1.readLine()) != null | (content2 = file2.readLine()) != null) {
+				lineCounter++;
+				
+				// Check for end of files.
+				if(content1 == null) content1 = "<End of File>";
+				if(content2 == null) content2 = "<End of File>";
+				
+				// Write the difference to an output file.
+				if(!content1.contentEquals(content2)) {
+					equals = false;
+					writeFile.write("Line " + lineCounter + ":");
+					writeFile.write("\n" + f1 + ":\t" + content1);
+					writeFile.write("\n" + f2 + ":\t" + content2 + "\n\n");
+				}	
+			}	
+			return equals;
+		}
+		catch(IOException ex) {
+			writeConsole.println(ex);
+			return false;
+		}
+	}
+	
+	
+	
+	
+	
+	
+}	
 	/*
 	boolean compareFiles(String f1, String f2, String resultsFile) {
 		boolean equal = true;
@@ -166,4 +193,4 @@ public class FileUtils {
 	*/
 	
 	
-}
+
