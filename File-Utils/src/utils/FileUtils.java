@@ -12,6 +12,7 @@ public class FileUtils {
 	 * @return allContents: Array of the files' content.
 	 */
 	String[] readFiles(String ... filenames) {
+		PrintWriter writeConsole = new PrintWriter(System.out, true);
 		
 		String[] allContents = new String[filenames.length];
 		StringBuilder fileContent = new StringBuilder();
@@ -29,12 +30,22 @@ public class FileUtils {
 			}
 		
 			catch(IOException ex) {
-				System.out.println(ex);
+				writeConsole.println(ex);
 			}
 			
 		}
 		return allContents;
 	}
+	
+	
+	/**
+	 * Read input from the keyboard and write it to a file.
+	 * @param filename: name of the file (and path).
+	 */
+	void writeFile(String filename) {
+		writeFile(filename, false);
+	}
+	
 	
 	/**
 	 * Read input from the keyboard and write it to a file.
@@ -63,7 +74,7 @@ public class FileUtils {
 					writeFile.write(keyboardInput+"\n");
 				}	
 			}
-			writeConsole.println("Text successfully written.");
+			writeConsole.println("Text written.");
 		}
 		catch(IOException ex) {
 			System.out.println(ex);
@@ -71,20 +82,45 @@ public class FileUtils {
 	}
 	
 	
-	boolean compareFiles(String file1, String file2) {
-	
-		// Separate the methods.
-		return true;
+	/** Iterate through two files, return true if they are the same.
+	 * 	@param f1: File 1.
+	 * 	@param f2: File 2.
+	 *  @return: true/false depending on if the files are the same.
+	 */
+	boolean compareFiles(String f1, String f2) {
+		String content1 = "";
+		String content2 = "";
+		
+		PrintWriter writeConsole = new PrintWriter(System.out, true);
+		try(BufferedReader file1 = new BufferedReader(new FileReader(f1));
+			BufferedReader file2 = new BufferedReader(new FileReader(f2))) {
+			
+			while((content1 = file1.readLine()) != null | (content2 = file2.readLine()) != null) {
+				
+				// Check for end of files.
+				if(content1 == null) content1 = "<End of File>";
+				if(content2 == null) content2 = "<End of File>";
+				
+				if(!content1.contentEquals(content2)) return false;	
+			}	
+			return true;			
+		}
+		catch(IOException ex) {
+			writeConsole.println(ex);
+			return false;
+		}	
 	}
 	
 	
+	/** Iterate through two files, write any differences to a results file,
+	 *  and return true/false.
+	 *  @param f1: File 1.
+	 *  @param f2: File 2.
+	 *  @param resultsFile: The output file.
+	 *  @return: true/false depending on if the files are the same.
+	 */
 	boolean compareFiles(String f1, String f2, String resultsFile) {
-		/** Iterate through two files, writing any differences to a results file.
-		 * 	@param f1: File 1.
-		 * 	@param f2: File 2.
-		 *  @param resultsFile: The output file.
-		 *  @return: true/false depending on if the files are the same.
-		 */
+
 		boolean equals = true;
 		int lineCounter = 0;
 		String content1 = "";
@@ -119,78 +155,4 @@ public class FileUtils {
 		}
 	}
 	
-	
-	
-	
-	
-	
 }	
-	/*
-	boolean compareFiles(String f1, String f2, String resultsFile) {
-		boolean equal = true;
-		String content1 = "";
-		String content2 = "";
-		int lineCounter = 0;
-		
-		PrintWriter writeConsole = new PrintWriter(System.out, true);
-
-		try(BufferedReader file1 = new BufferedReader(new FileReader(f1));
-			BufferedReader file2 = new BufferedReader(new FileReader(f2))) {
-			
-			while(!content1.contentEquals("End Of File") & !content2.contentEquals("End Of File")) {
-				content1 = file1.readLine();
-				content2 = file2.readLine();
-				lineCounter++;
-				
-				System.out.println("File 1: " + content1);
-				System.out.println("File 2: " + content2);
-				
-				// Check for nulls.
-				if(content1 == null) {
-					content1 = "End Of File";
-				}
-	
-				if(content2 == null) {
-					content2 = "End Of File";
-				}
-				
-	
-				
-				// When they differ...
-				if(!content1.contentEquals(content2)) {
-				
-					equal = false;
-					// Check if they want to write to a file.
-					if(!resultsFile.contentEquals("")) {
-					
-						System.out.println("Abou to write, inside line 114.");
-						try(FileWriter writeFile = new FileWriter(resultsFile)) {
-							writeFile.write("Line " + lineCounter);
-							writeFile.write("\n" + f1 + "\n\t" + content1);
-							writeFile.write("\n" + f2 + "\n\t" + content2);	
-							System.out.println("successful write.");
-						}
-						catch(IOException ex) {
-							writeConsole.println(ex);
-						}
-					}
-					
-				} 
-				if(content2 == null) {
-					System.out.println("yeah still here, null");
-				}
-			} 		
-		return equal;
-		
-		}
-		catch(IOException ex) {
-			writeConsole.println(ex);
-			return false;
-		}
-		
-	}
-
-	*/
-	
-	
-

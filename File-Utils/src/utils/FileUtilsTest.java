@@ -19,7 +19,7 @@ public class FileUtilsTest {
 		
 		//f.writeFile("wontwork.txt", false);
 		
-		System.out.println(f.compareFiles(filenames[0], filenames[1], "Files/output.txt"));
+		System.out.println(f.compareFiles(filenames[0], filenames[1]));
 		
 		
 	}
