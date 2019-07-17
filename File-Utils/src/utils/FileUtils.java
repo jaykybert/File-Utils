@@ -11,7 +11,7 @@ public class FileUtils {
 	 * @param filenames: x amount of files.
 	 * @return allContents: Array of the files' content.
 	 */
-	String[] readFiles(String ... filenames) {
+	static String[] readFiles(String ... filenames) {
 		PrintWriter writeConsole = new PrintWriter(System.out, true);
 		
 		String[] allContents = new String[filenames.length];
@@ -42,7 +42,7 @@ public class FileUtils {
 	 * Read input from the keyboard and write it to a file.
 	 * @param filename: name of the file (and path).
 	 */
-	void writeFile(String filename) {
+	static void writeFile(String filename) {
 		writeFile(filename, false);
 	}
 	
@@ -52,7 +52,7 @@ public class FileUtils {
 	 * @param filename: name of the file (and path).
 	 * @param append: Determines whether to overwrite or append to the file.
 	 */
-	void writeFile(String filename, boolean append) {
+	static void writeFile(String filename, boolean append) {
 		
 		BufferedReader readKeyboard = new BufferedReader(new InputStreamReader(System.in));
 		PrintWriter writeConsole = new PrintWriter(System.out, true);
@@ -87,7 +87,7 @@ public class FileUtils {
 	 * 	@param f2: File 2.
 	 *  @return: true/false depending on if the files are the same.
 	 */
-	boolean compareFiles(String f1, String f2) {
+	static boolean compareFiles(String f1, String f2) {
 		String content1 = "";
 		String content2 = "";
 		
@@ -119,7 +119,7 @@ public class FileUtils {
 	 *  @param resultsFile: The output file.
 	 *  @return: true/false depending on if the files are the same.
 	 */
-	boolean compareFiles(String f1, String f2, String resultsFile) {
+	static boolean compareFiles(String f1, String f2, String resultsFile) {
 
 		boolean equals = true;
 		int lineCounter = 0;

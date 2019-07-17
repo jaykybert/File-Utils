@@ -3,8 +3,7 @@ package utils;
 public class FileUtilsTest {
 
 	public static void main(String[] args) {
-		
-		FileUtils f = new FileUtils();
+
 		String[] filenames = {"Files/f1.txt", "Files/f2.txt", "Files/f3.txt"};
 		
 		/* ReadFiles test.
@@ -19,7 +18,7 @@ public class FileUtilsTest {
 		
 		//f.writeFile("wontwork.txt", false);
 		
-		System.out.println(f.compareFiles(filenames[0], filenames[1]));
+		System.out.println(FileUtils.compareFiles(filenames[0], filenames[1], "Files/output.txt"));
 		
 		
 	}
