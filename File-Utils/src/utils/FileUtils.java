@@ -155,4 +155,23 @@ public class FileUtils {
 		}
 	}
 	
+	static void copyFile(String fileIn, String fileOut) {
+		PrintWriter writeConsole = new PrintWriter(System.out, true);
+		String content;
+		
+		try(BufferedReader inputFile = new BufferedReader(new FileReader(fileIn));
+			FileWriter outputFile = new FileWriter(fileOut)) {
+			
+			while((content = inputFile.readLine()) != null) {
+				outputFile.write(content + "\n");
+				
+			}	
+		}
+		catch(IOException ex) {
+			writeConsole.println(ex);
+		}
+				
+	}
+	
+	
 }	

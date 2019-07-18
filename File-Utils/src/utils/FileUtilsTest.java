@@ -18,7 +18,9 @@ public class FileUtilsTest {
 		
 		//f.writeFile("wontwork.txt", false);
 		
-		System.out.println(FileUtils.compareFiles(filenames[0], filenames[1], "Files/output.txt"));
+		//System.out.println(FileUtils.compareFiles(filenames[0], filenames[1], "Files/output.txt"));
+		
+		FileUtils.copyFile("Files/f1.txt", "Files/f1_copied.txt");
 		
 		
 	}
