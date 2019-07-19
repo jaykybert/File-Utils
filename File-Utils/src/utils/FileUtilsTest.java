@@ -20,7 +20,7 @@ public class FileUtilsTest {
 		
 		//System.out.println(FileUtils.compareFiles(filenames[0], filenames[1], "Files/output.txt"));
 		
-		FileUtils.copyFile("Files/f1.txt", "Files/f1_copied.txt");
+		FileUtils.copyFile("Files/f1.txt", "Files/copied_file.txt");
 		
 		
 	}

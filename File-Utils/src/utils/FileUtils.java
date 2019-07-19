@@ -133,8 +133,7 @@ public class FileUtils {
 			FileWriter writeFile = new FileWriter(resultsFile)) {
 			
 			while((content1 = file1.readLine()) != null | (content2 = file2.readLine()) != null) {
-				lineCounter++;
-				
+				lineCounter++;		
 				// Check for end of files.
 				if(content1 == null) content1 = "<End of File>";
 				if(content2 == null) content2 = "<End of File>";
@@ -155,23 +154,24 @@ public class FileUtils {
 		}
 	}
 	
+	/** Copy the contents of one file to another.
+	 * @param fileIn: File to be copied.
+	 * @param fileOut: The copied file.
+	 */
 	static void copyFile(String fileIn, String fileOut) {
-		PrintWriter writeConsole = new PrintWriter(System.out, true);
 		String content;
+		PrintWriter writeConsole = new PrintWriter(System.out, true);
 		
 		try(BufferedReader inputFile = new BufferedReader(new FileReader(fileIn));
 			FileWriter outputFile = new FileWriter(fileOut)) {
 			
 			while((content = inputFile.readLine()) != null) {
 				outputFile.write(content + "\n");
-				
-			}	
+			}
+			writeConsole.println("File copied.");
 		}
 		catch(IOException ex) {
 			writeConsole.println(ex);
-		}
-				
+		}		
 	}
-	
-	
 }	
