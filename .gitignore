@@ -1,5 +1,4 @@
 # Eclipse	
-File-Utils/.classpath
-File-Utils/.project
-File-Utils/.settings/
-File-Utils/Files/
+.classpath
+.project
+File-Utils/bin/
