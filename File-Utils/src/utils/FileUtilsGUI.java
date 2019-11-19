@@ -14,8 +14,8 @@ import utils.FileUtils;
 public class FileUtilsGUI extends Application {
 	
 	String filepath1 = "";
-	
 	String filepath2 = "";
+	boolean showDifferences = false;
 	
 	
 	public static void main(String[] args) {
@@ -30,6 +30,9 @@ public class FileUtilsGUI extends Application {
 
 		Button chooseButton1 = new Button("File 1");
 		Button chooseButton2 = new Button("File 2");
+		
+		CheckBox viewDifferences = new CheckBox("Show Differences");
+		
 		Button compareFiles = new Button("Compare");
 		
 		FileChooser file1 = new FileChooser();
@@ -38,7 +41,7 @@ public class FileUtilsGUI extends Application {
 		file2.setTitle("Select File 2");
 		
 		
-		rootNode.getChildren().addAll(label, chooseButton1, chooseButton2, compareFiles);
+		rootNode.getChildren().addAll(label, chooseButton1, chooseButton2, viewDifferences, compareFiles);
 		Scene scene = new Scene(rootNode, 300, 400);
 		stage.setScene(scene);
 		stage.show();
@@ -66,9 +69,21 @@ public class FileUtilsGUI extends Application {
 		});
 		
 		compareFiles.setOnAction((actionEvent) -> {
-			boolean result  = FileUtils.compareFiles(filepath1, filepath2);
-			label.setText(String.valueOf(result));
-		
+			if(!filepath1.contentEquals("") & !filepath2.contentEquals("")) {
+				
+				boolean result = FileUtils.compareFiles(filepath1, filepath2, showDifferences);
+
+				
+			}
+			
 		});
+		
+		
+		viewDifferences.setOnAction((actionEvent) -> {
+			if(viewDifferences.isSelected())
+				showDifferences = true;
+		});
+		
+	
 	}	
 }
