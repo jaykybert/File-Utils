@@ -119,7 +119,7 @@ public class FileUtils {
 	 *  @param resultsFile: The output file.
 	 *  @return: true/false depending on if the files are the same.
 	 */
-	static boolean compareFiles(String f1, String f2, boolean showResults) {
+	static boolean compareFiles(String f1, String f2, String outputFile) {
 
 		boolean equals = true;
 		int lineCounter = 0;
@@ -129,8 +129,8 @@ public class FileUtils {
 		PrintWriter writeConsole = new PrintWriter(System.out, true);
 		
 		try(BufferedReader file1 = new BufferedReader(new FileReader(f1));
-			BufferedReader file2 = new BufferedReader(new FileReader(f2))) {
-			
+			BufferedReader file2 = new BufferedReader(new FileReader(f2));
+			FileWriter writeFile = new FileWriter(outputFile+"/target.txt")) {
 			while((content1 = file1.readLine()) != null | (content2 = file2.readLine()) != null) {
 				lineCounter++;		
 				// Check for end of files.
@@ -140,9 +140,9 @@ public class FileUtils {
 				// Write the difference to an output file.
 				if(!content1.contentEquals(content2)) {
 					equals = false;
-					//writeFile.write("Line " + lineCounter + ":");
-					//writeFile.write("\n" + f1 + ":\t" + content1);
-					//writeFile.write("\n" + f2 + ":\t" + content2 + "\n\n");
+					writeFile.write("Line " + lineCounter + ":");
+					writeFile.write("\n" + f1 + ":\t" + content1);
+					writeFile.write("\n" + f2 + ":\t" + content2 + "\n\n");
 				}	
 			}	
 			return equals;
