@@ -15,7 +15,7 @@ public class FileUtilsGUI extends Application {
 	
 	String filepath1 = "";
 	String filepath2 = "";
-	boolean showDifferences = false;
+	String dir = "";
 	
 	
 	public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class FileUtilsGUI extends Application {
 		Button chooseButton1 = new Button("File 1");
 		Button chooseButton2 = new Button("File 2");
 		
-		CheckBox viewDifferences = new CheckBox("Show Differences");
+		CheckBox saveDifferences = new CheckBox("Save Differences");
 		
 		Button compareFiles = new Button("Compare");
 		
@@ -41,7 +41,7 @@ public class FileUtilsGUI extends Application {
 		file2.setTitle("Select File 2");
 		
 		
-		rootNode.getChildren().addAll(label, chooseButton1, chooseButton2, viewDifferences, compareFiles);
+		rootNode.getChildren().addAll(label, chooseButton1, chooseButton2, saveDifferences, compareFiles);
 		Scene scene = new Scene(rootNode, 300, 400);
 		stage.setScene(scene);
 		stage.show();
@@ -69,20 +69,30 @@ public class FileUtilsGUI extends Application {
 		});
 		
 		compareFiles.setOnAction((actionEvent) -> {
-			if(!filepath1.contentEquals("") & !filepath2.contentEquals("")) {
-				
-				boolean result = FileUtils.compareFiles(filepath1, filepath2, showDifferences);
-
-				
+			boolean result;
+			if (saveDifferences.isSelected()) {
+				result = FileUtils.compareFiles(filepath1, filepath2, dir);
 			}
-			
+			else {
+				result = FileUtils.compareFiles(filepath1, filepath2);
+			}
+			label.setText(String.valueOf(result));
 		});
 		
 		
-		viewDifferences.setOnAction((actionEvent) -> {
-			if(viewDifferences.isSelected())
-				showDifferences = true;
+		saveDifferences.setOnAction((actionEvent) -> {
+			DirectoryChooser saveFile = new DirectoryChooser();
+			saveFile.setTitle("Save Differences File");
+			if (saveDifferences.isSelected()) {	
+				File selectedDir = saveFile.showDialog(stage);
+				if(selectedDir != null) {
+				dir = selectedDir.getAbsolutePath();
+				}
+			}
+
 		});
+		
+		
 		
 	
 	}	
