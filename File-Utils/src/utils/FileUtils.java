@@ -116,7 +116,7 @@ public class FileUtils {
 	 *  and return true/false.
 	 *  @param f1: File 1.
 	 *  @param f2: File 2.
-	 *  @param resultsFile: The output file.
+	 *  @param outputFile: The output file.
 	 *  @return: true/false depending on if the files are the same.
 	 */
 	static boolean compareFiles(String f1, String f2, String outputFile) {
@@ -130,7 +130,7 @@ public class FileUtils {
 		
 		try(BufferedReader file1 = new BufferedReader(new FileReader(f1));
 			BufferedReader file2 = new BufferedReader(new FileReader(f2));
-			FileWriter writeFile = new FileWriter(outputFile+"/target.txt")) {
+			FileWriter writeFile = new FileWriter(outputFile+"/differences.txt")) {
 			while((content1 = file1.readLine()) != null | (content2 = file2.readLine()) != null) {
 				lineCounter++;		
 				// Check for end of files.
