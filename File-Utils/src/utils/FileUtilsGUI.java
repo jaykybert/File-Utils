@@ -17,6 +17,9 @@ public class FileUtilsGUI extends Application {
 	String filepath2 = "";
 	String dir = "";
 
+	File cssFile = new File("style.css");
+	
+	boolean validFilepath = false;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -24,6 +27,7 @@ public class FileUtilsGUI extends Application {
 
 	public void start(Stage stage) {
 		stage.setTitle("File Utlities");
+
 
 		FlowPane rootNode = new FlowPane(Orientation.VERTICAL);
 		Label fileLabel1 = new Label("");
@@ -45,6 +49,9 @@ public class FileUtilsGUI extends Application {
 
 		rootNode.getChildren().addAll(chooseButton1, fileLabel1, chooseButton2, fileLabel2, saveDifferences, compareFiles, compareResult);
 		Scene scene = new Scene(rootNode, 300, 400);
+		scene.getStylesheets().clear();
+		scene.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
+		
 		stage.setScene(scene);
 		stage.show();
 
@@ -55,6 +62,7 @@ public class FileUtilsGUI extends Application {
 			try {
 				filepath1 = selectedFile.toString();
 				fileLabel1.setText(filepath1);
+				validFilepath = true;
 			}
 			catch(NullPointerException e) { // Closing without selecting a file.
 				fileLabel1.setText("Invalid Filepath");
@@ -66,6 +74,7 @@ public class FileUtilsGUI extends Application {
 			try {
 				filepath2 = selectedFile.toString();
 				fileLabel2.setText(filepath2);
+				validFilepath = true;
 			}
 			catch(NullPointerException e) { // Closing without selecting a file.
 				fileLabel2.setText("Invalid Filepath");
@@ -73,15 +82,20 @@ public class FileUtilsGUI extends Application {
 		});
 
 		compareFiles.setOnAction((actionEvent) -> {
-			boolean result;
-			if (saveDifferences.isSelected()) 
-				result = FileUtils.compareFiles(filepath1, filepath2, dir);
+			if(validFilepath) {
+				boolean result;
+				if (saveDifferences.isSelected()) 
+					result = FileUtils.compareFiles(filepath1, filepath2, dir);
 
-			else 
-				result = FileUtils.compareFiles(filepath1, filepath2);
+				else 
+					result = FileUtils.compareFiles(filepath1, filepath2);
 
-			if(result) compareResult.setText("The files are the same.");
-			else compareResult.setText("The files differ.");
+				if(result) compareResult.setText("The files are the same.");
+				else compareResult.setText("The files differ.");
+			}
+			else {
+				compareResult.setText("Please enter two valid filepaths.");
+			}
 		});
 
 
