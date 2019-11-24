@@ -17,7 +17,7 @@ public class FileUtilsGUI extends Application {
 	String filepath2 = "";
 	String dir = "";
 
-	File cssFile = new File("style.css");
+	File cssFile = new File("File-Utils\\src\\utils\\style.css");
 	
 	boolean validFilepath = false;
 
@@ -36,7 +36,10 @@ public class FileUtilsGUI extends Application {
 
 		Button chooseButton1 = new Button("File 1");
 		Button chooseButton2 = new Button("File 2");
+		chooseButton1.getStyleClass().add("fileButtons");
+		chooseButton2.getStyleClass().add("fileButtons");
 
+		
 		CheckBox saveDifferences = new CheckBox("Save Differences");
 
 		Button compareFiles = new Button("Compare");
@@ -49,12 +52,11 @@ public class FileUtilsGUI extends Application {
 
 		rootNode.getChildren().addAll(chooseButton1, fileLabel1, chooseButton2, fileLabel2, saveDifferences, compareFiles, compareResult);
 		Scene scene = new Scene(rootNode, 300, 400);
+		
 		scene.getStylesheets().clear();
 		scene.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
-		
 		stage.setScene(scene);
 		stage.show();
-
 
 		// Event Handling
 		chooseButton1.setOnAction((actionEvent) -> {

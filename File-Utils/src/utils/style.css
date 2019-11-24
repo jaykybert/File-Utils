@@ -1,0 +1,7 @@
+.fileButtons {
+	-fx-pref-width: 70px;
+	-fx-pref-height: 25px;
+	-fx-font-size: 12px;
+	-fx-font-family: monospace;
+	-fx-text-fill: #000000;
+}
