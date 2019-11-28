@@ -36,9 +36,6 @@ public class FileUtilsGUI extends Application {
 
 		Button chooseButton1 = new Button("File 1");
 		Button chooseButton2 = new Button("File 2");
-		chooseButton1.getStyleClass().add("fileButtons");
-		chooseButton2.getStyleClass().add("fileButtons");
-
 		
 		CheckBox saveDifferences = new CheckBox("Save Differences");
 
@@ -55,6 +52,7 @@ public class FileUtilsGUI extends Application {
 		
 		scene.getStylesheets().clear();
 		scene.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
+		System.out.println(cssFile.getAbsolutePath());
 		stage.setScene(scene);
 		stage.show();
 
