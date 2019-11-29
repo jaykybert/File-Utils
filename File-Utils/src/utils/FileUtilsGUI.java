@@ -3,10 +3,10 @@ package utils;
 import java.io.File;
 
 import javafx.application.*;
-import javafx.geometry.Orientation;
+import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.*;
 import javafx.stage.*;
 
 import utils.FileUtils;
@@ -30,12 +30,15 @@ public class FileUtilsGUI extends Application {
 
 
 		FlowPane rootNode = new FlowPane(Orientation.VERTICAL);
+	
 		Label fileLabel1 = new Label("");
 		Label fileLabel2 = new Label("");
 		Label compareResult = new Label("");
 
 		Button chooseButton1 = new Button("File 1");
 		Button chooseButton2 = new Button("File 2");
+	
+		
 		
 		CheckBox saveDifferences = new CheckBox("Save Differences");
 
@@ -47,12 +50,11 @@ public class FileUtilsGUI extends Application {
 		file2.setTitle("Select File 2");
 
 
-		rootNode.getChildren().addAll(chooseButton1, fileLabel1, chooseButton2, fileLabel2, saveDifferences, compareFiles, compareResult);
+		rootNode.getChildren().addAll(chooseButton1, fileLabel1, chooseButton2, fileLabel2, saveDifferences, compareFiles);
 		Scene scene = new Scene(rootNode, 300, 400);
 		
 		scene.getStylesheets().clear();
 		scene.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
-		System.out.println(cssFile.getAbsolutePath());
 		stage.setScene(scene);
 		stage.show();
 
